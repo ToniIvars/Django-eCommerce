@@ -1,19 +1,39 @@
 {% extends 'authentication/base.html' %}
+{% load static %}
 
 {% block title %} Login {% endblock %}
 
 {% block content %}
 <form action="" method="post"> {% csrf_token %}
     <div class="form-group d-flex justify-content-center">
-        <input type="text" name="username" placeholder="Username" class="form-control">
+        <input type="text" name="username" placeholder="Username" class="form-control" required>
     </div>
 
-    <div class="form-group d-flex justify-content-center">
-        <input type="password" name="password" placeholder="Password" class="form-control">
+    <div class="form-group d-flex justify-content-center align-items-center">
+        <input type="password" name="password" id="pwd" placeholder="Password" class="form-control" required>
+        <button type="button" style="background-color: white; border: none;" class="ml-1">
+            <image src="{% static 'authentication/img/eye.svg' %}" style="width: 2rem; height: 2rem;"></image>
+        </button>
     </div>
         
     <div class="form-group d-flex justify-content-center">
-        <input class="btn btn-primary" type="submit" value="Login">
+        <input class="btn btn-primary font-weight-bold" type="submit" value="Login">
     </div>
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        document.querySelector('button').onclick = () => {
+
+            let inp = document.querySelector('#pwd');
+            if (inp.type === 'password') {
+                inp.type = 'text';
+            } else if (inp.type === 'text') {
+                inp.type = 'password';
+            }
+        }
+
+    });
+</script>
 {% endblock %}
