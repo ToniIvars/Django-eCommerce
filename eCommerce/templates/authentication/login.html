@@ -12,7 +12,7 @@
     <div class="form-group d-flex justify-content-center align-items-center">
         <input type="password" name="password" id="pwd" placeholder="Password" class="form-control" required>
         <button type="button" style="background-color: white; border: none;" class="ml-1">
-            <image src="{% static 'authentication/img/eye.svg' %}" style="width: 2rem; height: 2rem;"></image>
+            <image id="eye" src="{% static 'authentication/img/eye.svg' %}" style="width: 2rem; height: 2rem;"></image>
         </button>
     </div>
         
@@ -27,10 +27,13 @@
         document.querySelector('button').onclick = () => {
 
             let inp = document.querySelector('#pwd');
+            let img = document.querySelector('#eye')
             if (inp.type === 'password') {
                 inp.type = 'text';
+                img.src = '/static/authentication/img/eye-cross.svg';
             } else if (inp.type === 'text') {
                 inp.type = 'password';
+                img.src = '/static/authentication/img/eye.svg';
             }
         }
 
