@@ -10,6 +10,14 @@
     {% bootstrap_css %}
 </head>
 <body>
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% else %}
+            <div class="alert alert-{{message.tags}}">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
+
     <div class="container px-4 pt-4 mt-5" style="max-width: 300px; border: 2px solid #b6b6b6; border-radius: 15px;">
         {% block content %}{% endblock %}
     </div>
