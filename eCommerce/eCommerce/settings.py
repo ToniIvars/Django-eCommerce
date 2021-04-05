@@ -125,4 +125,4 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-LOGIN_URL = '/auth/login/'
+LOGIN_URL = '/auth/login'
