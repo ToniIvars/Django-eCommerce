@@ -1,0 +1,55 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+
+{% block title %} Signup {% endblock %}
+
+{% block content %}
+<form action="" method="post"> {% csrf_token %}
+    <div class="form-group d-flex justify-content-center">
+        <input type="text" name="username" placeholder="Username" class="form-control" required>
+    </div>
+
+    <div class="form-group d-flex justify-content-center">
+        <input type="email" name="email" placeholder="Email" class="form-control" required>
+    </div>
+
+    <div class="form-group d-flex justify-content-center align-items-center">
+        <input type="password" name="password" id="pwd" placeholder="Password" class="form-control" required>
+        <button type="button" class="bg-white border-0" class="ml-1">
+            <img id="eye" src="{% static 'authentication/img/eye.svg' %}" style="width: 1.8rem;">
+        </button>
+    </div>
+
+    <div class="form-group d-flex justify-content-center align-items-center">
+        <input type="password" name="password-confirmation" id="pwd2" placeholder="Password (again)" class="form-control" required>
+        <button type="button" class="bg-white border-0" class="ml-1" style="width: 1.8rem;"></button>
+    </div>
+        
+    <div class="form-group d-flex justify-content-center">
+        <input class="btn btn-primary font-weight-bold" type="submit" value="Signup">
+    </div>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        document.querySelector('button').onclick = () => {
+
+            let inp = document.querySelector('#pwd');
+            let inp2 = document.querySelector('#pwd2')
+            let img = document.querySelector('#eye')
+            
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                inp2.type = 'text';
+                img.src = '/static/authentication/img/eye-cross.svg';
+            } else if (inp.type === 'text') {
+                inp.type = 'password';
+                inp2.type = 'password';
+                img.src = '/static/authentication/img/eye.svg';
+            }
+        }
+
+    });
+</script>
+{% endblock %}
