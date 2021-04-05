@@ -12,7 +12,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponse(f'Logged in as {user}')
+            return redirect('index')
         else:
             messages.error(request, 'The username or the password are incorrect.')
 
