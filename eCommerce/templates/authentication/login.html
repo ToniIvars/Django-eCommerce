@@ -16,7 +16,7 @@
     Don't you have an account? <a href="{% url 'signup' %}">Signup</a>
 </div>
 
-<script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         const inp = document.querySelector('#id_password')
         let count = 1
@@ -36,5 +36,6 @@
         }
 
     });
-</script>
+</script> -->
+<script src="{% static 'authentication/login.js' %}"></script>
 {% endblock %}
