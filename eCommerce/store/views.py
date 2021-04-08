@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -23,7 +23,7 @@ def profile(request):
 
             print(username, password, email, first_name, last_name)
 
-            messages.success('Profile edited successfully.')
+            messages.success(request, 'Profile edited successfully.')
             return redirect('index')
 
     else:
