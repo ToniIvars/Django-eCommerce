@@ -47,7 +47,15 @@ def signup_view(request):
 
             if password == password2:
                 # Creation of the user
-                pass
+                user = User.objects.create_user(
+                    username=username,
+                    email=email,
+                    password=password
+                )
+                
+                login(request, user)
+                return redirect('index')
+
             else:
                 messages.error(request, 'Passwords must be equal')
 
