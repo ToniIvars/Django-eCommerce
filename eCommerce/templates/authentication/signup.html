@@ -3,6 +3,17 @@
 
 {% block title %} Signup {% endblock %}
 
+{% block style %}
+<style>
+    .errorlist {
+        color: red;
+        list-style: none;
+        margin-bottom: 0.2rem;
+        margin-right: -3.5rem;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <form action="" method="post"> {% csrf_token %}
     <div class="form-group">
