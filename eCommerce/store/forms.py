@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class ProfileForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Username', 'class':'form-control'}))
     password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'placeholder':'Password (not required)', 'class':'form-control'}))
-    email = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Email', 'class':'form-control'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder':'Email', 'class':'form-control'}))
     first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder':'First name', 'class':'form-control'}))
     last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder':'Last name', 'class':'form-control'}))
 
