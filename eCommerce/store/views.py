@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 from .forms import ProfileForm
 
@@ -19,6 +20,19 @@ def profile(request):
             email = form.cleaned_data['email']
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
+
+            user = User.objects.get(id=request.user.id)
+
+            if password:
+                user.set_password(password)
+            if email:
+                user.email = email
+            if first_name:
+                user.first_name = first_name
+            if last_name:
+                user.last_name = last_name
+            
+            user.save()
 
             messages.success(request, 'Profile edited successfully.')
             return redirect('index')
