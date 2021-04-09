@@ -15,13 +15,10 @@ def profile(request):
         form = ProfileForm(request.POST)
         
         if form.is_valid():
-            username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             email = form.cleaned_data['email']
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
-
-            print(username, password, email, first_name, last_name)
 
             messages.success(request, 'Profile edited successfully.')
             return redirect('index')
