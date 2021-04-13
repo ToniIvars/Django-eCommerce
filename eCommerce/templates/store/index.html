@@ -4,5 +4,12 @@
 {% block title %} Index {% endblock %}
 
 {% block content %}
-    <h1>Logged in as {{user.username}}</h1>
+    <h1 class="text-center">Last products</h1>
+    {% for product in products %}
+        <div class="mb-4 border border-danger p-1">
+            <h2 class="d-inline mr-3">{{product.name}}</h2>
+            <p class="d-inline">{{product.seller}}</p>
+            <p class="mt-1">Price: {{product.price}}€</p>
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -4,11 +4,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 
 from .forms import ProfileForm
+from .models import Product
 
 # Create your views here.
 @login_required
 def index(request):
-    return render(request, 'store/index.html')
+    last_products = Product.objects.all()
+    return render(request, 'store/index.html', {'products':last_products})
 
 @login_required
 def profile(request):
@@ -40,4 +42,4 @@ def profile(request):
     else:
         form = ProfileForm(user_id=request.user.id)
 
-    return render(request, 'store/profile.html', {'form':form})
+    return render(request, 'store/profile.html', {'form':form, 'profile':True})
