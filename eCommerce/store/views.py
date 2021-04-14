@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -43,3 +43,12 @@ def profile(request):
         form = ProfileForm(user_id=request.user.id)
 
     return render(request, 'store/profile.html', {'form':form, 'profile':True})
+
+@login_required
+def view_profile(request, profile):
+    info = get_object_or_404(User, username=profile)
+    username = info.username
+
+    products = Product.objects.all().filter(seller__exact=info.id)
+
+    return render(request, 'store/view-profile.html', {'username':username, 'products':products})

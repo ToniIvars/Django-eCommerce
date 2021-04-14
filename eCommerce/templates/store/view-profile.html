@@ -1,10 +1,10 @@
 {% extends 'store/base.html' %}
 {% load static %}
 
-{% block title %} Index {% endblock %}
+{% block title %} View profile {% endblock %}
 
 {% block content %}
-    <h1 class="text-center my-4">Last products</h1>
+    <h1 class="text-center my-4">Seller: {{username}}</h1>
     <hr>
     {% for product in products %}
         <div class="mb-4">
@@ -12,8 +12,9 @@
                 <h2 class="m-0">{{product.name}}</h2>
                 <p class="price m-0">{{product.price}}$</p>
             </div>
-            <p class="m-0">{{product.seller}}</p>
         </div>
         <hr>
+    {% empty %}
+        <h3 class="text-center">There are no products sold by {{username}}</h3>
     {% endfor %}
 {% endblock %}

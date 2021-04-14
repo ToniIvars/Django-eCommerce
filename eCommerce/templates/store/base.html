@@ -9,7 +9,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eCommerce - {% block title %}{% endblock %}</title>
     {% bootstrap_css %}
-    {% block style %}{% endblock %}
+    <style>
+        #form-div {
+            margin: 1.25rem auto;
+            max-width: 400px;
+        }
+
+        .errorlist {
+            color: red;
+            list-style: none;
+            margin-bottom: 0.2rem;
+            text-align: right;
+        }
+        
+        .price {
+            font-size: 1.75rem;
+        }
+
+        h1 {
+            font-size: 3.25rem;
+        }
+    </style>
 </head>
 <body>
     <header >
