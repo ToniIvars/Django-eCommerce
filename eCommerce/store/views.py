@@ -52,3 +52,9 @@ def view_profile(request, profile):
     products = Product.objects.all().filter(seller__exact=info.id)
 
     return render(request, 'store/view-profile.html', {'username':username, 'products':products})
+
+@login_required
+def product(request, product_name):
+    product = get_object_or_404(Product, name=product_name)
+    
+    return render(request, 'store/product.html', {'product':product})

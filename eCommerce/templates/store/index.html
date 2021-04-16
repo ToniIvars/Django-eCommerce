@@ -15,7 +15,9 @@
             </div>
             {% endif %}
             <div class="d-inline-flex flex-column">
-                <h2 class="m-0">{{product.name}}</h2>
+                <a href="{% url 'product' product_name=product.name %}" class="product-headers">
+                    <h2 class="m-0">{{product.name}}</h2>
+                </a>
                 <a href="{% url 'view_profile' profile=product.seller %}" class="m-0">{{product.seller}}</a>
             </div>
         </div>

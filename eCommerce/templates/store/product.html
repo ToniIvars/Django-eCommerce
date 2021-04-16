@@ -1,0 +1,23 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %} Index {% endblock %}
+
+{% block content %}
+    <h1 class="text-center product-title mb-3">{{product.name}}</h1>
+    <h3 class="text-center mb-4"><a href="{% url 'view_profile' profile=product.seller %}">{{product.seller}}</a></h3>
+
+    <div class="d-md-flex">
+        {% if product.image %}
+        <div class="mr-md-3 text-center">
+            <img class="product-images" src="{{product.image.url}}" alt="{{product.name}}">
+            <p class="price">Price: {{product.price}}$</p>
+        </div>
+        {% endif %}
+        <div class="d-inline-flex flex-column text-justify">
+            {% for paragraph in product.split_description %}
+                <p class="mb-2">{{paragraph}}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
