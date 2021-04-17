@@ -96,3 +96,17 @@ def edit_product(request, product_name):
         form = ProductForm(instance=prod)
 
     return render(request, 'store/edit-product.html', {'form':form})
+
+@login_required
+def delete_product(request, product_name):
+    prod = get_object_or_404(Product, name=product_name)
+
+    if request.method == 'POST':
+        if request.POST.get('delete'):
+            prod.delete()
+
+            messages.success(request, 'Product deleted successfully')
+        
+        return redirect('index')
+
+    return render(request, 'store/delete-product.html', {'product':prod.name})
