@@ -76,3 +76,23 @@ def create_product(request):
         form = ProductForm()
 
     return render(request, 'store/create-product.html', {'form':form})
+
+@login_required
+def edit_product(request, product_name):
+    prod = get_object_or_404(Product, name=product_name)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=prod)
+        
+        if form.is_valid():
+            prod = form.save(commit=False)
+            prod.seller = User.objects.get(id=request.user.id)
+            prod.save()
+
+            messages.success(request, 'Product edited successfully')
+            return redirect('index')
+
+    else:
+        form = ProductForm(instance=prod)
+
+    return render(request, 'store/edit-product.html', {'form':form})
