@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('profile', views.profile, name='profile'),
     path('view-profile/<str:profile>', views.view_profile, name='view_profile'),
-    path('product/<product_name>', views.product, name='product')
+    path('product/<product_name>', views.product, name='product'),
+    path('create-product', views.create_product, name='create_product')
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

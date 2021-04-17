@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-from .forms import ProfileForm
+from .forms import ProfileForm, ProductForm
 from .models import Product
 
 # Create your views here.
@@ -58,3 +58,21 @@ def product(request, product_name):
     product = get_object_or_404(Product, name=product_name)
     
     return render(request, 'store/product.html', {'product':product})
+
+@login_required
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            prod = form.save(commit=False)
+            prod.seller = User.objects.get(id=request.user.id)
+            prod.save()
+
+            messages.success(request, 'Product created successfully')
+            return redirect('index')
+
+    else:
+        form = ProductForm()
+
+    return render(request, 'store/create-product.html', {'form':form})

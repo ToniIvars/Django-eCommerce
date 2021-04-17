@@ -24,7 +24,19 @@ class ProfileForm(forms.Form):
         for field in fields:
             self.fields[field].label = ''
 
-class ProductForm(forms.ModelForm):
+class ProductForm(forms.ModelForm): 
     class Meta:
         model = Product
-        fields = ['name', 'price', 'seller', 'description', 'image']
+        fields = ('name', 'price', 'description', 'image')
+
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder':'Name', 'class':'form-control'}),
+            'price': forms.NumberInput(attrs={'placeholder':'Price', 'class':'form-control'}),
+            'description': forms.Textarea(attrs={'placeholder':'Description of the product', 'class':'form-control'})
+        }
+        
+        labels = {
+            'name': '',
+            'price': '',
+            'description': ''
+        }
