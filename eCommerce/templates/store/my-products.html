@@ -23,7 +23,7 @@
         </div>
         <div class="d-inline text-center">
             <p class="price m-0">{{product.price}}$</p>
-            <a class="mx-2" href="{% url 'edit_product' product_name=product.name %}">
+            <a class="mx-1" href="{% url 'edit_product' product_name=product.name %}">
                 <img class="edit-delete-images" src="{% static 'store/edit.svg' %}" alt="Edit">
             </a>
             <a href="{% url 'delete_product' product_name=product.name %}">
