@@ -42,7 +42,7 @@ def profile(request):
     else:
         form = ProfileForm(user_id=request.user.id)
 
-    return render(request, 'store/profile.html', {'form':form, 'profile':True})
+    return render(request, 'store/profile.html', {'form':form})
 
 @login_required
 def view_profile(request, profile):
