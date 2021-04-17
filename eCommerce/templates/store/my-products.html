@@ -1,10 +1,10 @@
 {% extends 'store/base.html' %}
 {% load static %}
 
-{% block title %} {{username}} {% endblock %}
+{% block title %} My products {% endblock %}
 
 {% block content %}
-    <h1 class="text-center mb-4">Seller: {{username}}</h1>
+    <h1 class="text-center mb-4">My products</h1>
     <hr>
     {% for product in products %}
     <div class="d-flex justify-content-between align-items-center">
@@ -21,10 +21,18 @@
                 <a href="{% url 'view_profile' profile=product.seller %}" class="m-0">{{product.seller}}</a>
             </div>
         </div>
-        <p class="price">{{product.price}}$</p>
+        <div class="d-inline text-center">
+            <p class="price m-0">{{product.price}}$</p>
+            <a class="mx-2" href="{% url 'edit_product' product_name=product.name %}">
+                <img class="edit-delete-images" src="{% static 'store/edit.svg' %}" alt="Edit">
+            </a>
+            <a href="{% url 'delete_product' product_name=product.name %}">
+                <img class="edit-delete-images" src="{% static 'store/delete.svg' %}" alt="Delete">
+            </a>
+        </div>
     </div>
     <hr>
     {% empty %}
-        <h3 class="text-center">There are no products sold by {{username}}</h3>
+        <h3 class="text-center">You have no products to sell yet.</h3>
     {% endfor %}
 {% endblock %}

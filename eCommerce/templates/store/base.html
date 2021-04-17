@@ -22,8 +22,8 @@
             text-align: right;
         }
 
-        .price {
-            font-size: 2rem;
+        .price, h2 {
+            font-size: 1.75rem;
         }
 
         h1 {
@@ -38,6 +38,7 @@
             max-width: 75px;
             max-height: 75px;
             border-radius: 5px;
+            margin-right: 0.5rem;
         }
 
         .product-headers {
@@ -56,6 +57,10 @@
 
         .product-title {
             border-bottom: 2px solid black;
+        }
+
+        .edit-delete-images {
+            width: 1.8rem;
         }
     </style>
 </head>
@@ -80,6 +85,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 <a class="dropdown-item" href="{% url 'create_product' %}">Create product</a>
+                                <a class="dropdown-item" href="{% url 'my_products' %}">My products</a>
                                 <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
                             </div>

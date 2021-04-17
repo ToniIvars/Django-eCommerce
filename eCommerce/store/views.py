@@ -110,3 +110,9 @@ def delete_product(request, product_name):
         return redirect('index')
 
     return render(request, 'store/delete-product.html', {'product':prod.name})
+
+@login_required
+def my_products(request):
+    products = Product.objects.all().filter(seller__exact=request.user.id)
+
+    return render(request, 'store/my-products.html', {'products':products})
