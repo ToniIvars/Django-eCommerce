@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Product
 
 class ProfileForm(forms.Form):
     password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'placeholder':'Password (not required)', 'class':'form-control'}))
@@ -22,3 +23,8 @@ class ProfileForm(forms.Form):
         fields = ('password', 'email', 'first_name', 'last_name')
         for field in fields:
             self.fields[field].label = ''
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'price', 'seller', 'description', 'image']
