@@ -9,7 +9,7 @@ from .models import Product
 # Create your views here.
 @login_required
 def index(request):
-    last_products = Product.objects.all()[:8]
+    last_products = Product.objects.all().order_by('-id')[:8]
     return render(request, 'store/index.html', {'products':last_products})
 
 @login_required
