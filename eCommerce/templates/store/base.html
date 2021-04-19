@@ -100,7 +100,7 @@
                     <div class="input-group">
                         <input class="form-control" type="text" placeholder="Search" aria-label="Search">
                         <span class="input-group-append">
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-outline-light" type="submit" id="search-button">
                                 <img src="{% static 'store/search.svg' %}" alt="Search" id="search-image">
                             </button>
                         </span>
@@ -126,5 +126,6 @@
             {% block content %}{% endblock %}
         </div>
     {% bootstrap_javascript jquery='full' %}
+    <script src="{% static 'store/base.js' %}"></script>
 </body>
 </html>
