@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.views.decorators.http import require_POST
 
 from .forms import ProfileForm, ProductForm
 from .models import Product
@@ -113,6 +114,17 @@ def delete_product(request, product_name):
 
 @login_required
 def my_products(request):
-    products = Product.objects.all().filter(seller__exact=request.user.id)
+    products = Product.objects.filter(seller__exact=request.user.id)
 
     return render(request, 'store/my-products.html', {'products':products})
+
+@login_required
+def search(request):
+    if request.method == 'GET':
+        messages.error(request, "You can't access the search URL if it isn't from the serach bar")
+        return redirect('index')
+
+    query = request.POST.get('query')
+    results = Product.objects.filter(name__icontains=query)
+
+    return render(request, 'store/search.html', {'results':results, 'query':query})
