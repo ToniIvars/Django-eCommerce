@@ -127,4 +127,4 @@ def search(request):
     query = request.POST.get('query')
     results = Product.objects.filter(name__icontains=query)
 
-    return render(request, 'store/search.html', {'results':results, 'query':query})
+    return render(request, 'store/search.html', {'results':results, 'query':query, 'filter':True})
