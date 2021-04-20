@@ -121,10 +121,17 @@ def my_products(request):
 @login_required
 def search(request):
     if request.method == 'GET':
-        messages.error(request, "You can't access the search URL if it isn't from the serach bar")
-        return redirect('index')
+        query = request.GET.get('q', '')
+        if not query:
+            messages.error(request, 'You must specify a query in the search URL')
+            return redirect('index')
 
-    query = request.POST.get('query')
-    results = Product.objects.filter(name__icontains=query)
+        results = Product.objects.filter(name__icontains=query)
+        url_filter = request.GET.get('f', False)
+    
+    else:
+        query = request.POST.get('query')
+        results = Product.objects.filter(name__icontains=query)
+        url_filter = False
 
-    return render(request, 'store/search.html', {'results':results, 'query':query, 'filter':True})
+    return render(request, 'store/search.html', {'results':results, 'query':query, 'filter':url_filter})
