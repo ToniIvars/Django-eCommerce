@@ -5,7 +5,17 @@
 {% block title %} Results {% endblock %}
 
 {% block content %}
-    <h1 class="text-center mb-4">Results for "{{query}}"</h1>
+    <p id="query_hidden" style="display: none;">{{query}}</p>
+    <h1 class="text-center mb-2">Results for "{{query}}"</h1>
+
+    {% if results %}
+    <div class="d-flex justify-content-center align-items-center">
+        <p class="m-0">Order by price:</p>
+        <button class="filter-button text-primary mx-2" id="price">Ascendant</button>
+        <button class="filter-button text-primary" id="price_reversed">Descendant</button>
+    </div>
+    {% endif %}
+
     <hr>
     {% for product in results|order_by:filter %}
     <div class="d-flex justify-content-between align-items-center">
