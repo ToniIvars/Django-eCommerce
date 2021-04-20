@@ -11,7 +11,7 @@
         {% if product.image %}
         <div class="mr-md-3 text-center">
             <img class="product-images" src="{{product.image.url}}" alt="{{product.name}}">
-            <p class="price">Price: {{product.price}}$</p>
+            <p class="price">Price: {{product.price|floatformat:"-2"}}$</p>
         </div>
         {% endif %}
         <div class="d-inline-flex flex-column text-justify">

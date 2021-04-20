@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="d-inline text-center">
-            <p class="price m-0">{{product.price}}$</p>
+            <p class="price m-0">{{product.price|floatformat:"-2"}}$</p>
             <a class="mx-1" href="{% url 'edit_product' product_name=product.name %}">
                 <img class="edit-delete-images" src="{% static 'store/edit.svg' %}" alt="Edit">
             </a>

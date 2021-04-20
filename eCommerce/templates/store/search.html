@@ -21,15 +21,7 @@
                 <a href="{% url 'view_profile' profile=product.seller %}" class="m-0">{{product.seller}}</a>
             </div>
         </div>
-        <div class="d-inline text-center">
-            <p class="price m-0">{{product.price}}$</p>
-            <a class="mx-1" href="{% url 'edit_product' product_name=product.name %}">
-                <img class="edit-delete-images" src="{% static 'store/edit.svg' %}" alt="Edit">
-            </a>
-            <a href="{% url 'delete_product' product_name=product.name %}">
-                <img class="edit-delete-images" src="{% static 'store/delete.svg' %}" alt="Delete">
-            </a>
-        </div>
+        <p class="price m-0">{{product.price|floatformat:"-2"}}$</p>
     </div>
     <hr>
     {% empty %}

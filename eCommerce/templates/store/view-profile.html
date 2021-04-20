@@ -21,7 +21,7 @@
                 <a href="{% url 'view_profile' profile=product.seller %}" class="m-0">{{product.seller}}</a>
             </div>
         </div>
-        <p class="price">{{product.price}}$</p>
+        <p class="price">{{product.price|floatformat:"-2"}}$</p>
     </div>
     <hr>
     {% empty %}
