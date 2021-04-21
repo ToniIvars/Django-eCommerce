@@ -24,6 +24,7 @@ class Order(models.Model):
     
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='product')
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='buyer')
+    address = models.CharField(max_length=50)
     status = models.CharField(max_length=11, choices=STATUS_CHOICES, default='Opened')
     date = models.DateField(auto_now_add=True, editable=False, blank=True)
 
