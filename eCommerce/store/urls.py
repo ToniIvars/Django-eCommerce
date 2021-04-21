@@ -12,6 +12,7 @@ urlpatterns = [
     path('edit-product/<product_name>', views.edit_product, name='edit_product'),
     path('delete-product/<product_name>', views.delete_product, name='delete_product'),
     path('my-products', views.my_products, name='my_products'),
-    path('search', views.search, name='search')
+    path('search', views.search, name='search'),
+    path('buy/<product_name>', views.buy, name='buy')
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

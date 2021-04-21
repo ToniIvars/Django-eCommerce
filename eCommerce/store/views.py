@@ -135,3 +135,9 @@ def search(request):
         url_filter = False
 
     return render(request, 'store/search.html', {'results':results, 'query':query, 'filter':url_filter})
+
+@login_required
+def buy(request, product_name):
+    prod = get_object_or_404(Product, name=product_name)
+
+    return render(request, 'store/buy.html', {'product':prod.name})
