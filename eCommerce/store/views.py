@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_POST
 
-from .forms import ProfileForm, ProductForm
+from .forms import ProfileForm, ProductForm, BuyForm
 from .models import Product
 
 # Create your views here.
@@ -140,4 +140,14 @@ def search(request):
 def buy(request, product_name):
     prod = get_object_or_404(Product, name=product_name)
 
-    return render(request, 'store/buy.html', {'product':prod.name})
+    if request.method == 'POST':
+        form = BuyForm(request.POST)
+        
+        if form.is_valid():
+            messages.success(request, 'Product bought successfully')
+            return redirect('index')
+
+    else:
+        form = BuyForm()
+
+    return render(request, 'store/buy.html', {'product':prod.name, 'form':form})

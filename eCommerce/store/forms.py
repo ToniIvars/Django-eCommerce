@@ -35,3 +35,7 @@ class ProductForm(forms.ModelForm):
             'price': '',
             'description': ''
         }
+
+class BuyForm(forms.Form):
+    address = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder':'Address', 'class':'form-control'}))
+    credit_number = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder':'Credit card number', 'class':'form-control'}))
