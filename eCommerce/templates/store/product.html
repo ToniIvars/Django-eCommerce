@@ -8,12 +8,14 @@
     <h3 class="text-center mb-4"><a href="{% url 'view_profile' profile=product.seller %}">{{product.seller}}</a></h3>
 
     <div class="d-md-flex">
-        {% if product.image %}
-        <div class="mr-md-3 text-center">
-            <img class="product-images" src="{{product.image.url}}" alt="{{product.name}}">
-            <p class="price">Price: {{product.price|floatformat:"-2"}}$</p>
+        <div class="mr-md-3 mb-4 mb-md-0 text-center">
+            {% if product.image %}
+                <img class="product-images" src="{{product.image.url}}" alt="{{product.name}}">
+            {% endif %}
+            <p class="price mb-1">Price: {{product.price|floatformat:"-2"}}$</p>
+            <a class="btn btn-primary w-75" href="{% url 'buy' product_name=product.name %}">Buy product</a>
         </div>
-        {% endif %}
+
         <div class="d-inline-flex flex-column text-justify">
             {% for paragraph in product.split_description %}
                 <p class="mb-2">{{paragraph}}</p>
