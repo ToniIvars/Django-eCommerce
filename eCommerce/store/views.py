@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.views.decorators.http import require_POST
 
 from .forms import ProfileForm, ProductForm, BuyForm
 from .models import Product
@@ -127,14 +126,15 @@ def search(request):
             return redirect('index')
 
         results = Product.objects.filter(name__icontains=query)
-        url_filter = request.GET.get('f', False)
     
     else:
         query = request.POST.get('query')
         results = Product.objects.filter(name__icontains=query)
-        url_filter = False
+    
+    results_ascendant = results.order_by('price')
+    results_descendant = results.order_by('-price')
 
-    return render(request, 'store/search.html', {'results':results, 'query':query, 'filter':url_filter})
+    return render(request, 'store/search.html', {'query':query, 'results_ascendant':results_ascendant, 'results_descendant':results_descendant})
 
 @login_required
 def buy(request, product_name):

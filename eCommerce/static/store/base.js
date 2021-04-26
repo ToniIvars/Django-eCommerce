@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Code for the color changing of the search button
     const button = document.getElementById('search-button')
     const image = document.getElementById('search-image')
 
@@ -11,26 +12,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Code for the filter buttons
-    const price = document.getElementById('price')
-    const price_reversed = document.getElementById('price_reversed')
-    const query = document.getElementById('query_hidden').innerText
-
-    const url = window.location.href
-    const base_url = url.split('?')[0]
-
-    price.onclick = () => {
-        location.assign(`${base_url}?q=${query}&f=price`)
+    function able_button(button) {
+        button.disabled = false
+        button.classList.remove('button-disabled')
     }
-    price_reversed.onclick = () => {
-        location.assign(`${base_url}?q=${query}&f=price_reversed`)
+    
+    function disable_button(button) {
+        button.disabled = true
+        button.classList.add('button-disabled')
     }
 
-    if (url.includes('price_reversed')) {
-        price_reversed.disabled = true
-        price_reversed.classList.add('button-disabled')
+    const button_price_ascendant = document.getElementById('price_ascendant')
+    const button_price_descendant = document.getElementById('price_descendant')
 
-    } else if (url.includes('price')) {
-        price.disabled = true
-        price.classList.add('button-disabled')
+    const div_results_ascendant = document.getElementById('results_ascendant')
+    const div_results_descendant = document.getElementById('results_descendant')
+
+    disable_button(button_price_ascendant)
+
+    button_price_descendant.onclick = () => {
+        div_results_ascendant.style.display = 'none'
+        div_results_descendant.style.display = 'block'
+
+        disable_button(button_price_descendant)
+        able_button(button_price_ascendant)
+    }
+
+    button_price_ascendant.onclick = () => {
+        div_results_descendant.style.display = 'none'
+        div_results_ascendant.style.display = 'block'
+
+        able_button(button_price_descendant)
+        disable_button(button_price_ascendant)
     }
 })

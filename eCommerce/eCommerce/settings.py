@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'authentication',
     'store',
-    'store.templatetags'
 ]
 
 MIDDLEWARE = [

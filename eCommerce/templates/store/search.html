@@ -1,41 +1,65 @@
 {% extends 'store/base.html' %}
 {% load static %}
-{% load search_filters %}
 
 {% block title %} Results {% endblock %}
 
 {% block content %}
-    <p id="query_hidden" style="display: none;">{{query}}</p>
+    {% if results_ascendant %}
     <h1 class="text-center mb-2">Results for "{{query}}"</h1>
 
-    {% if results %}
     <div class="d-flex justify-content-center align-items-center">
         <p class="m-0">Order by price:</p>
-        <button class="filter-button text-primary mx-2" id="price">Ascendant</button>
-        <button class="filter-button text-primary" id="price_reversed">Descendant</button>
+        <button class="filter-button text-primary mx-2" id="price_ascendant">Ascendant</button>
+        <button class="filter-button text-primary" id="price_descendant">Descendant</button>
     </div>
-    {% endif %}
 
-    <hr>
-    {% for product in results|order_by:filter %}
-    <div class="d-flex justify-content-between align-items-center">
-        <div>
-            {% if product.image %}
-            <div class="d-inline">
-                <img class="index-images" src="{{product.image.url}}" alt="{{product.name}}">
+    <div id="results_ascendant">
+        <hr>
+        {% for product in results_ascendant %}
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                {% if product.image %}
+                <div class="d-inline">
+                    <img class="index-images" src="{{product.image.url}}" alt="{{product.name}}">
+                </div>
+                {% endif %}
+                <div class="d-inline-flex flex-column">
+                    <a href="{% url 'product' product_name=product.name %}" class="product-headers">
+                        <h2 class="m-0">{{product.name}}</h2>
+                    </a>
+                    <a href="{% url 'view_profile' profile=product.seller %}" class="m-0">{{product.seller}}</a>
+                </div>
             </div>
-            {% endif %}
-            <div class="d-inline-flex flex-column">
-                <a href="{% url 'product' product_name=product.name %}" class="product-headers">
-                    <h2 class="m-0">{{product.name}}</h2>
-                </a>
-                <a href="{% url 'view_profile' profile=product.seller %}" class="m-0">{{product.seller}}</a>
-            </div>
+            <p class="price m-0">{{product.price|floatformat:"-2"}}$</p>
         </div>
-        <p class="price m-0">{{product.price|floatformat:"-2"}}$</p>
+        <hr>
+        {% endfor %}
     </div>
-    <hr>
-    {% empty %}
-        <h3 class="text-center">There are no products with the query you have made</h3>
-    {% endfor %}
+
+    <div id="results_descendant" style="display: none;">
+        <hr>
+        {% for product in results_descendant %}
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                {% if product.image %}
+                <div class="d-inline">
+                    <img class="index-images" src="{{product.image.url}}" alt="{{product.name}}">
+                </div>
+                {% endif %}
+                <div class="d-inline-flex flex-column">
+                    <a href="{% url 'product' product_name=product.name %}" class="product-headers">
+                        <h2 class="m-0">{{product.name}}</h2>
+                    </a>
+                    <a href="{% url 'view_profile' profile=product.seller %}" class="m-0">{{product.seller}}</a>
+                </div>
+            </div>
+            <p class="price m-0">{{product.price|floatformat:"-2"}}$</p>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <h2 class="text-center mt-2">There are no products with the query you have made</h3>
+    {% endif %}
 {% endblock %}
