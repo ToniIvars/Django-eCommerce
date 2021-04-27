@@ -140,6 +140,9 @@
             {% block content %}{% endblock %}
         </div>
     {% bootstrap_javascript jquery='full' %}
+
     <script src="{% static 'store/base.js' %}"></script>
+    {% block script %}
+    {% endblock %}
 </body>
 </html>
