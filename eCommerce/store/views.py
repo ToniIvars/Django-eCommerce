@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
+# from django.views.decorators.http import require_POST
 
 from .forms import ProfileForm, ProductForm, BuyForm
 from .models import Product
@@ -151,3 +152,29 @@ def buy(request, product_name):
         form = BuyForm()
 
     return render(request, 'store/buy.html', {'product':prod.name, 'form':form})
+
+# @require_POST
+@login_required
+def add_to_cart(request, product_name):
+    prod = get_object_or_404(Product, name=product_name)
+
+    if request.session.get('cart', None):
+        cart = request.session['cart']
+
+        if product_name in [prod['product'] for prod in request.session['cart']]:
+            for i in range(len(cart)):
+                if cart[i]['product'] == product_name:
+                    cart[i]['quantity'] += 1
+                    break        
+        else:
+            cart.append({'product':product_name, 'quantity':1})
+
+        request.session['cart'] = cart
+
+    else:
+        request.session['cart'] = [
+            {'product':product_name, 'quantity':1}
+        ]
+
+    messages.success(request, 'Product added to the cart')
+    return redirect('product', product_name=product_name)

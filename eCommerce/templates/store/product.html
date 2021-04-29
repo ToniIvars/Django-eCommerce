@@ -13,7 +13,8 @@
                 <img class="product-images" src="{{product.image.url}}" alt="{{product.name}}">
             {% endif %}
             <p class="price mb-1">Price: {{product.price|floatformat:"-2"}}$</p>
-            <a class="btn btn-primary w-75" href="{% url 'buy' product_name=product.name %}">Buy product</a>
+            <a class="btn btn-primary w-75 mb-2" href="{% url 'buy' product_name=product.name %}">Buy product</a>
+            <a class="btn btn-primary w-75" href="{% url 'add_to_cart' product_name=product.name %}">Add to cart</a>
         </div>
 
         <div class="d-inline-flex flex-column text-justify">
