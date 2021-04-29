@@ -36,7 +36,7 @@ def profile(request):
             
             user.save()
 
-            messages.success(request, 'Profile edited successfully.')
+            messages.success(request, 'Profile edited successfully')
             return redirect('index')
 
     else:
