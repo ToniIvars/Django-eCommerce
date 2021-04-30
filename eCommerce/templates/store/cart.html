@@ -1,0 +1,41 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %} Cart {% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Cart</h1>
+    <hr>
+    {% for product, quantity in cart_products %}
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            {% if product.image %}
+            <div class="d-inline">
+                <img class="index-images" src="{{product.image.url}}" alt="{{product.name}}">
+            </div>
+            {% endif %}
+            <div class="d-inline-flex flex-column">
+                <a href="{% url 'product' product_name=product.name %}" class="product-headers">
+                    <h2 class="m-0">{{product.name}}</h2>
+                </a>
+                <a href="{% url 'view_profile' profile=product.seller %}" class="m-0">{{product.seller}}</a>
+            </div>
+        </div>
+        <div class="d-inline-flex flex-column flex-md-row align-items-center">
+            <p class="price m-0">{{product.price|floatformat:"-2"}}$</p>
+            <div class="d-flex justify-content-center w-100 align-items-center">
+                <button class="ml-md-3 non-bg-button">
+                    <img style="width: 1.5rem;" src="{% static 'store/remove.svg' %}" alt="Remove">
+                </button>
+                <div class="mx-1" style="font-size: 1.5rem;">{{quantity}}</div>
+                <button class="non-bg-button">
+                    <img style="width: 1.5rem;" src="{% static 'store/add.svg' %}" alt="Add">
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% empty %}
+    <h3 class="text-center">You have no products in the cart yet.</h3>
+    {% endfor %}
+{% endblock %}
