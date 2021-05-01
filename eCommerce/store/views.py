@@ -3,9 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_POST
+from django.http import HttpResponse
 
 from .forms import ProfileForm, ProductForm, BuyForm
 from .models import Product
+
+import json
 
 # Create your views here.
 @login_required
@@ -164,7 +167,7 @@ def add_to_cart(request, product_name):
             for i in range(len(cart)):
                 if cart[i]['product'] == product_name:
                     cart[i]['quantity'] += 1
-                    break        
+                    break 
         else:
             cart.append({'product':product_name, 'quantity':1})
 
@@ -194,3 +197,15 @@ def cart(request):
 @require_POST
 def change_quantity(request):
     cart = request.session['cart']
+    post_data = json.loads(request.body.decode("utf-8"))
+    
+    if post_data['change'] == 'remove':
+        for i in range(len(cart)):
+            if cart[i]['product'] == post_data['product']:
+                cart[i]['quantity'] -= 1
+                new_quantity = cart[i]['quantity']
+                break
+        
+        request.session['cart'] = cart
+
+    return HttpResponse(content=json.dumps({'new_quantity':new_quantity}), content_type = "application/json")
