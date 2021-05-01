@@ -209,3 +209,19 @@ def change_quantity(request):
         request.session['cart'] = cart
 
     return HttpResponse(content=json.dumps({'new_quantity':new_quantity}), content_type = "application/json")
+
+@login_required
+@require_POST
+def delete_from_cart(request):
+    cart = request.session['cart']
+    product_to_delete = json.loads(request.body.decode("utf-8"))['product_to_delete']
+
+    for i in range(len(cart)):
+        print(i)
+        if cart[i]['product'] == product_to_delete:
+            cart.pop(i)
+            break
+    
+    request.session['cart'] = cart
+
+    return HttpResponse(content=json.dumps({'deleted':product_to_delete}), content_type = "application/json")

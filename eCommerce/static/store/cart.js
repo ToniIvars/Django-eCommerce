@@ -1,6 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value
+
+    function delete_from_cart(product_name) {
+
+        fetch('/delete-from-cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify({
+                product_to_delete: product_name
+            })
+        })
+            .then(res => console.log(res.json()))
+    }
+
     function change_quantity(what_to_do, product_name, quantity) {
-        const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value
 
         fetch('/change-quantity', {
             method: 'POST',
@@ -21,9 +37,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (new_quantity > 0) {
                     document.getElementById(`quantity-${product_name}`).innerHTML = new_quantity
-                    
+
                 } else {
                     document.getElementById(product_name).classList.add('not-displayed')
+                    delete_from_cart(product_name)
                 }
             })
     }
