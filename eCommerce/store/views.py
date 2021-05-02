@@ -224,7 +224,6 @@ def delete_from_cart(request):
     product_to_delete = json.loads(request.body.decode("utf-8"))['product_to_delete']
 
     for i in range(len(cart)):
-        print(i)
         if cart[i]['product'] == product_to_delete:
             cart.pop(i)
             break

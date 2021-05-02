@@ -42,6 +42,13 @@
     {% empty %}
     <h3 class="text-center">You have no products in the cart yet.</h3>
     {% endfor %}
+
+    {% if cart_products %}
+    <div class="float-right" id="total-display">
+        <span>Total: </span>
+        <span class="ml-2" id="total-span">$</span>
+    </div>
+    {% endif %}
 {% endblock %}
 
 {% block script %}
