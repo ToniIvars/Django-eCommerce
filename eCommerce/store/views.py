@@ -163,6 +163,20 @@ def buy(request, product_name):
     return render(request, 'store/buy.html', {'product':prod.name, 'form':form})
 
 @login_required
+def products_bought(request):
+    orders = Order.objects.filter(buyer=User.objects.get(id=request.user.id))
+    products_state = None
+    
+    if orders:
+        products = [order.product for order in orders]
+        states = [order.state for order in orders]
+        quantities = [order.quantity for order in orders]
+
+        products_state = set(zip(products, states, quantities))
+
+    return render(request, 'store/products-bought.html', {'products_state':products_state})
+
+@login_required
 def add_to_cart(request, product_name):
     prod = get_object_or_404(Product, name=product_name)
 

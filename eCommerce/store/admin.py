@@ -6,7 +6,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'seller', 'price')
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('product', 'buyer', 'status')
+    list_display = ('product', 'buyer', 'state')
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
