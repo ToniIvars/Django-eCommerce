@@ -54,4 +54,14 @@ document.addEventListener('DOMContentLoaded', function () {
             change_quantity(what_to_do, product_name, quantity)
         }
     })
+
+    document.querySelectorAll("[id^='add']").forEach(btn => {
+        const what_to_do = 'add'
+        const product_name = btn.id.split('-').pop()
+        const quantity = document.getElementById(`quantity-${product_name}`).innerHTML
+
+        btn.onclick = () => {
+            change_quantity(what_to_do, product_name, quantity)
+        }
+    })
 })

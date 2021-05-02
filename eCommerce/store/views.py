@@ -205,8 +205,15 @@ def change_quantity(request):
                 cart[i]['quantity'] -= 1
                 new_quantity = cart[i]['quantity']
                 break
-        
-        request.session['cart'] = cart
+    
+    elif post_data['change'] == 'add':
+        for i in range(len(cart)):
+            if cart[i]['product'] == post_data['product']:
+                cart[i]['quantity'] += 1
+                new_quantity = cart[i]['quantity']
+                break
+                    
+    request.session['cart'] = cart
 
     return HttpResponse(content=json.dumps({'new_quantity':new_quantity}), content_type = "application/json")
 
