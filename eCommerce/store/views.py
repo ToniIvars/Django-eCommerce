@@ -231,4 +231,4 @@ def delete_from_cart(request):
     
     request.session['cart'] = cart
 
-    return HttpResponse(content=json.dumps({'deleted':product_to_delete}), content_type = "application/json")
+    return HttpResponse(content=f'{product_to_delete} deleted form the cart', content_type = "application/json")

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 product_to_delete: product_name
             })
         })
-            .then(res => console.log(res.json()))
+            .then(res => console.log(res.text()))
     }
 
     function change_quantity(what_to_do, product_name, quantity) {
@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(res => res.json())
             .then(data => {
                 const new_quantity = data['new_quantity']
-                console.log(new_quantity)
 
                 if (new_quantity > 0) {
                     document.getElementById(`quantity-${product_name}`).innerHTML = new_quantity
