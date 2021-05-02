@@ -43,6 +43,6 @@ class BuyForm(forms.Form):
         ('bitcoin', 'Bitcoin')
     ]
 
-    address = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder':'Address', 'class':'form-control'}))
+    address = forms.CharField(label='', max_length=50, widget=forms.TextInput(attrs={'placeholder':'Address', 'class':'form-control'}))
     paying_ways = forms.CharField(widget=forms.RadioSelect(choices=paying_way_choices))
     paying_data = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control'}))

@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 
 from .forms import ProfileForm, ProductForm, BuyForm
-from .models import Product
+from .models import Product, Order
 
 import json
 
@@ -148,6 +148,12 @@ def buy(request, product_name):
         form = BuyForm(request.POST)
         
         if form.is_valid():
+            address = form.cleaned_data['address']
+            buyer = User.objects.get(id=request.user.id)
+            status = 'Opened'
+
+            Order(product=prod, buyer=buyer, address=address, status=status).save()
+
             messages.success(request, 'Product bought successfully')
             return redirect('index')
 
