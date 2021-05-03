@@ -91,6 +91,10 @@ def create_product(request):
 def edit_product(request, product_name):
     prod = get_object_or_404(Product, name=product_name)
 
+    if str(prod.seller) != request.user.username:
+        messages.error(request, "Here are the products you can edit")
+        return redirect('my_products')
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=prod)
         
@@ -110,6 +114,10 @@ def edit_product(request, product_name):
 @login_required
 def delete_product(request, product_name):
     prod = get_object_or_404(Product, name=product_name)
+
+    if str(prod.seller) != request.user.username:
+        messages.error(request, "Here are the products you can delete")
+        return redirect('my_products')
 
     if request.method == 'POST':
         if request.POST.get('delete'):
