@@ -4,7 +4,10 @@
 {% block title %} My products {% endblock %}
 
 {% block content %}
-    <h1 class="text-center mb-4">My products</h1>
+    <div class="text-center mb-4">
+        <h1 class="mb-3">My products</h1>
+        <a class="btn btn-success text-center" href="{% url 'create_product' %}">Add a new product</a>
+    </div>
     <hr>
     {% for product in products %}
     <div class="d-flex justify-content-between align-items-center">
