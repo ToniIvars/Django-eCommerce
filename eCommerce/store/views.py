@@ -13,7 +13,7 @@ import json
 # Create your views here.
 @login_required
 def index(request):
-    last_products = Product.objects.all().order_by('-id')[:8]
+    last_products = Product.objects.exclude(seller=User.objects.get(id=request.user.id)).order_by('-id')[:8]
     return render(request, 'store/index.html', {'products':last_products})
 
 @login_required
@@ -50,16 +50,22 @@ def profile(request):
 
 @login_required
 def view_profile(request, profile):
+    if profile == request.user.username:
+        return redirect('profile')
+
     info = get_object_or_404(User, username=profile)
     username = info.username
 
-    products = Product.objects.all().filter(seller__exact=info.id)
+    products = Product.objects.filter(seller__exact=info.id)
 
     return render(request, 'store/view-profile.html', {'username':username, 'products':products})
 
 @login_required
 def product(request, product_name):
     product = get_object_or_404(Product, name=product_name)
+
+    if str(product.seller) == request.user.username:
+        return redirect('edit_product', product_name=product_name)
     
     return render(request, 'store/product.html', {'product':product})
 
@@ -128,12 +134,11 @@ def search(request):
         if not query:
             messages.error(request, 'You must specify a query in the search URL')
             return redirect('index')
-
-        results = Product.objects.filter(name__icontains=query)
     
     else:
         query = request.POST.get('query')
-        results = Product.objects.filter(name__icontains=query)
+    
+    results = Product.objects.filter(name__icontains=query).exclude(seller=User.objects.get(id=request.user.id))
     
     results_ascendant = results.order_by('price')
     results_descendant = results.order_by('-price')
@@ -143,6 +148,10 @@ def search(request):
 @login_required
 def buy(request, product_name):
     prod = get_object_or_404(Product, name=product_name)
+
+    if str(prod.seller) == request.user.username:
+        messages.error(request, "You can't buy your own product")
+        return redirect('index')
 
     if request.method == 'POST':
         form = BuyForm(request.POST)
@@ -179,6 +188,10 @@ def orders(request):
 @login_required
 def add_to_cart(request, product_name):
     prod = get_object_or_404(Product, name=product_name)
+
+    if str(prod.seller) == request.user.username:
+        messages.error(request, "You can't add to cart your own product")
+        return redirect('index')
 
     if request.session.get('cart', None):
         cart = request.session['cart']
