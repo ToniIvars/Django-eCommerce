@@ -6,7 +6,7 @@
 {% block content %}
     <h1 class="text-center mb-4">Orders</h1>
     <hr>
-    {% for product, state, quantity in products_state %}
+    {% for product, state, quantity, date in products_state %}
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
             {% if product.image %}
@@ -24,6 +24,7 @@
         <div class="delivery-state text-center">
             <span>State:</span>
             <span class="ml-2 js-state">{{state}}</span>
+            <p class="text-dark">{{date|date:"j M Y"}}</p>
         </div>
     </div>
     <hr>

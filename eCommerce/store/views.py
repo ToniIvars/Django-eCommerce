@@ -188,8 +188,9 @@ def orders(request):
         products = [order.product for order in orders]
         states = [order.state for order in orders]
         quantities = [order.quantity for order in orders]
+        dates = [order.date for order in orders]
 
-        products_state = set(zip(products, states, quantities))
+        products_state = set(zip(products, states, quantities, dates))
 
     return render(request, 'store/orders.html', {'products_state':products_state})
 
