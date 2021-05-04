@@ -167,9 +167,15 @@ def buy(request, product_name):
         if form.is_valid():
             address = form.cleaned_data['address']
             buyer = User.objects.get(id=request.user.id)
-            status = 'Opened'
+            quantity = form.cleaned_data['quantity']
 
-            Order(product=prod, buyer=buyer, address=address, status=status).save()
+            try:
+                actual_order = Order.objects.get(product=prod, buyer=buyer, state='Opened')
+                actual_order.quantity += 1
+                actual_order.save()
+
+            except:
+                Order(product=prod, buyer=buyer, address=address, state='Opened').save()
 
             messages.success(request, 'Product bought successfully')
             return redirect('index')
