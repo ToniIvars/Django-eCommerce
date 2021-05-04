@@ -171,11 +171,11 @@ def buy(request, product_name):
 
             try:
                 actual_order = Order.objects.get(product=prod, buyer=buyer, state='Opened')
-                actual_order.quantity += 1
+                actual_order.quantity += quantity
                 actual_order.save()
 
             except:
-                Order(product=prod, buyer=buyer, address=address, state='Opened').save()
+                Order(product=prod, buyer=buyer, address=address, state='Opened', quantity=quantity).save()
 
             messages.success(request, 'Product bought successfully')
             return redirect('index')
@@ -196,7 +196,7 @@ def orders(request):
         quantities = [order.quantity for order in orders]
         dates = [order.date for order in orders]
 
-        products_state = set(zip(products, states, quantities, dates))
+        products_state = tuple(zip(products, states, quantities, dates))
 
     return render(request, 'store/orders.html', {'products_state':products_state})
 
