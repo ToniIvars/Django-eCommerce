@@ -4,17 +4,14 @@
 {% block title %} Order {% endblock %}
 
 {% block content %}
-    <h1 class="text-center mb-4">Order</h1>
+    <h1 class="text-center mb-4">Order of {{order.product}}</h1>
     
-    <table class="table table-responsive-sm table-bordered text-center">
-        <thead>
+    <table class="table table-borderless text-center">
+        <thead class="thead-light">
             <tr>
                 <th>Product</th>
                 <th>Buyer</th>
                 <th>Address</th>
-                <th>Quantity</th>
-                <th>Date</th>
-                <th>State</th>
             </tr>
         </thead>
         <tbody>
@@ -22,8 +19,20 @@
                 <td>{{order.product}}</td>
                 <td>{{order.buyer}}</td>
                 <td>{{order.address}}</td>
+            </tr>
+        </tbody>
+        <tbody><tr><td></td></tr></tbody>
+        <thead class="thead-light">
+            <tr>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
                 <td>{{order.quantity}}</td>
-                <td>{{order.date}}</td>
+                <td>{{order.date|date:"j F Y"}}</td>
                 <td id="order-state">{{order.state}}</td>
             </tr>
         </tbody>
