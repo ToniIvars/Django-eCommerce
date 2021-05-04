@@ -6,7 +6,7 @@
 {% block content %}
     <h1 class="text-center mb-4">Orders</h1>
     <hr>
-    {% for product, state, quantity, date in products_state %}
+    {% for product, state, quantity, date, id in products_state %}
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
             {% if product.image %}
@@ -14,12 +14,12 @@
                 <img class="index-images" src="{{product.image.url}}" alt="{{product.name}}">
             </div>
             {% endif %}
-            <div class="d-inline-flex flex-column ml-2">
-                <a href="{% url 'product' product_name=product.name %}" class="product-headers">
+            <a href="{% url 'view_order' id=id %}" class="product-headers">
+                <div class="d-inline-flex flex-column ml-2">
                     <h2 class="m-0">{{product.name}}</h2>
-                </a>
-                <h2 class="d-inline m-0">X{{quantity}}</h2>
-            </div>
+                    <h2 class="d-inline m-0">X{{quantity}}</h2>
+                </div>
+            </a>
         </div>
         <div class="delivery-state d-flex flex-column align-items-center align-items-md-end">
             <div class="d-flex justify-content-center align-items-center flex-md-row flex-column">

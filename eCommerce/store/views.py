@@ -195,8 +195,9 @@ def orders(request):
         states = [order.state for order in orders]
         quantities = [order.quantity for order in orders]
         dates = [order.date for order in orders]
+        ids = [order.id for order in orders]
 
-        products_state = tuple(zip(products, states, quantities, dates))
+        products_state = tuple(zip(products, states, quantities, dates, ids))
 
     return render(request, 'store/orders.html', {'products_state':products_state})
 
@@ -279,3 +280,13 @@ def delete_from_cart(request):
     request.session['cart'] = cart
 
     return HttpResponse(content=f'{product_to_delete} deleted form the cart', content_type = "application/json")
+
+@login_required
+def view_order(request, id):
+    order = get_object_or_404(Order, id=id)
+
+    if str(order.product.seller) != request.user.username:
+        messages.error(request, "Here are your orders")
+        return redirect('orders')
+
+    return render(request, 'store/view-order.html', {'order':order})

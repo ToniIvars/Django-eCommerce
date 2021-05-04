@@ -1,0 +1,35 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %} Order {% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Order</h1>
+    
+    <table class="table table-responsive-sm table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Buyer</th>
+                <th>Address</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{order.product}}</td>
+                <td>{{order.buyer}}</td>
+                <td>{{order.address}}</td>
+                <td>{{order.quantity}}</td>
+                <td>{{order.date}}</td>
+                <td id="order-state">{{order.state}}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'store/view-order.js' %}"></script>
+{% endblock %}
