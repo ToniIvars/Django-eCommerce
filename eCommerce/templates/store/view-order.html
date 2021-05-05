@@ -48,6 +48,8 @@
             </tr>
         </tbody>
     </table>
+    <p style="display: none;" id="order-id">{{order.id}}</p>
+    {% csrf_token %}
 {% endblock %}
 
 {% block script %}

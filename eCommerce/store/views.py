@@ -290,3 +290,16 @@ def view_order(request, id):
         return redirect('orders')
 
     return render(request, 'store/view-order.html', {'order':order})
+
+@login_required
+@require_POST
+def change_delivery_state(request):
+    post_data = json.loads(request.body.decode("utf-8"))
+    order_id = post_data['order_id']
+    state = post_data['state']
+
+    order = Order.objects.get(id=order_id)
+    order.state = state
+    order.save()
+
+    return HttpResponse(content=f'Order {order_id} state changed')

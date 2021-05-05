@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const order_id = document.getElementById('order-id').innerHTML
+    const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value
+
     const first_item = Array.from(document.querySelectorAll('button.dropdown-toggle')).slice(-1)
     const other_items = Array.from(document.querySelectorAll('button.dropdown-item'))
 
@@ -15,8 +18,26 @@ document.addEventListener('DOMContentLoaded', function () {
             return 'green'
         }
     }
+
+    function change_state_backend(state) {
+
+        fetch('/change-delivery-state', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify({
+                order_id: order_id,
+                state: state
+            })
+        })
+            .then(res => res.text())
+            .then(data => console.log(data))
+    }
     
     items.forEach(element => {
+        element.innerHTML = element.innerHTML.trim()
         element.classList.add(check_state(element))
     });
 
@@ -31,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             items[0].classList.replace(item1_color, check_state(items[0]))
             element.classList.replace(element_color, check_state(element))
+
+            change_state_backend(items[0].innerHTML)
         }
     });
 })
