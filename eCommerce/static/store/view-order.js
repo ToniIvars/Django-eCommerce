@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const items = first_item.concat(other_items)
 
     function check_state(element) {
-        if (element.innerHTML.includes('Opened')) {
+        if (element.innerHTML === 'Opened') {
             return 'red'
     
-        } else if (element.innerHTML.includes('In progress')) {
+        } else if (element.innerHTML === 'In progress') {
             return 'yellow'
     
-        } else if (element.innerHTML.includes('Delivered')) {
+        } else if (element.innerHTML === 'Delivered') {
             return 'green'
         }
     }
@@ -36,8 +36,23 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => console.log(data))
     }
     
-    items.forEach(element => {
+    items.forEach((element, index) => {
         element.innerHTML = element.innerHTML.trim()
+        
+        if (index === 1) {
+            if (items[0].innerHTML !== 'Opened') {
+                element.innerHTML = 'Opened'
+            }
+        } else if (index === 2) {
+            if (items[0].innerHTML !== 'Opened') {
+                if (items[0].innerHTML === 'In progress') {
+                    element.innerHTML = 'Delivered'
+                } else {
+                    element.innerHTML = 'In progress'
+                }
+            }
+        }
+
         element.classList.add(check_state(element))
     });
 
