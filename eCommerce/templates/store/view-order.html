@@ -33,7 +33,18 @@
             <tr>
                 <td>{{order.quantity}}</td>
                 <td>{{order.date|date:"j F Y"}}</td>
-                <td id="order-state">{{order.state}}</td>
+                <!-- <td id="order-state">{{order.state}}</td> -->
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{order.state}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <button class="btn btn-light dropdown-item">In progress</button>
+                          <button class="btn btn-light dropdown-item">Delivered</button>
+                        </div>
+                      </div>                      
+                </td>
             </tr>
         </tbody>
     </table>
