@@ -303,3 +303,7 @@ def change_delivery_state(request):
     order.save()
 
     return HttpResponse(content=f'Order {order_id} state changed')
+
+@login_required
+def buy_from_cart(request):
+    pass

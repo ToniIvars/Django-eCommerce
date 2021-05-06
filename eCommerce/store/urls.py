@@ -20,6 +20,7 @@ urlpatterns = [
     path('change-quantity', views.change_quantity, name='change_quantity'),
     path('delete-from-cart', views.delete_from_cart, name='delete_from_cart'),
     path('view-order/<int:id>', views.view_order, name='view_order'),
-    path('change-delivery-state', views.change_delivery_state, name='change_delivery_state')
+    path('change-delivery-state', views.change_delivery_state, name='change_delivery_state'),
+    path('buy-from-cart', views.buy_from_cart, name='buy_from_cart')
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
