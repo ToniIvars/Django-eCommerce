@@ -56,6 +56,12 @@ document.addEventListener('DOMContentLoaded', function () {
             total += prices[i].innerHTML.slice(0,-1) * quantities[i].innerHTML
         }
 
+        if (total === 0) {
+            document.getElementById('total-display').className = ''
+            document.getElementById('total-display').classList.add('d-none')
+            document.getElementById('deleted-products-text').classList.replace('d-none', 'd-block')
+        }
+
         total = Math.round(total * 100) / 100
         total_span.innerHTML = `${total}$`
     }
