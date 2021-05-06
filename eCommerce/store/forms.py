@@ -47,3 +47,14 @@ class BuyForm(forms.Form):
     paying_ways = forms.CharField(widget=forms.RadioSelect(choices=paying_way_choices))
     paying_data = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control'}))
     quantity = forms.IntegerField(label='', min_value=1, initial=1, widget=forms.NumberInput(attrs={'placeholder':'Number of products', 'class':'form-control'}))
+
+class BuyCartForm(forms.Form):
+    paying_way_choices = [
+        ('bank_card', 'Bank card'),
+        ('paypal', 'PayPal'),
+        ('bitcoin', 'Bitcoin')
+    ]
+
+    address = forms.CharField(label='', max_length=50, widget=forms.TextInput(attrs={'placeholder':'Address', 'class':'form-control'}))
+    paying_ways = forms.CharField(widget=forms.RadioSelect(choices=paying_way_choices))
+    paying_data = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control'}))

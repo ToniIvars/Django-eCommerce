@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 
-from .forms import ProfileForm, ProductForm, BuyForm
+from .forms import ProfileForm, ProductForm, BuyForm, BuyCartForm
 from .models import Product, Order
 
 import json
@@ -306,4 +306,31 @@ def change_delivery_state(request):
 
 @login_required
 def buy_from_cart(request):
-    pass
+    cart = request.session.get('cart', None)
+
+    if request.method == 'POST':
+        form = BuyCartForm(request.POST)
+        
+        if form.is_valid():
+            address = form.cleaned_data['address']
+            buyer = User.objects.get(id=request.user.id)
+
+            for cart_product in cart:
+                product = Product.objects.get(name=cart_product['product'])
+                quantity = cart_product['quantity']
+
+                try:
+                    actual_order = Order.objects.get(product=product, buyer=buyer, state='Opened')
+                    actual_order.quantity += quantity
+                    actual_order.save()
+
+                except:
+                    Order(product=product, buyer=buyer, address=address, state='Opened', quantity=quantity).save()
+
+            messages.success(request, f'Product{["s" if len(cart)>1 else ""][0]} bought successfully')
+            return redirect('index')
+
+    else:
+        form = BuyCartForm()
+
+    return render(request, 'store/buy-from-cart.html', {'form':form, 'num':len(cart)})
