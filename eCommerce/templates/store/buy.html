@@ -4,8 +4,9 @@
 {% block title %} Buy {% endblock %}
 
 {% block content %}
-    <h1 class="mb-4 text-center">Buy "{{product}}"</h1>
+    <h1 class="mb-2 text-center">Buy "{{product}}"</h1>
 
+    <p class="text-center price">Price: {{price|floatformat:"-2"}}$</p>
     <form action="" method="post"> {% csrf_token %}
         <div id="form-div" class="form-group">
             {{form.as_p}}

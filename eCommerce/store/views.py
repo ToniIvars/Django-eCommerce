@@ -156,6 +156,7 @@ def search(request):
 @login_required
 def buy(request, product_name):
     prod = get_object_or_404(Product, name=product_name)
+    price = prod.price
 
     if str(prod.seller) == request.user.username:
         messages.error(request, "You can't buy your own product")
@@ -183,7 +184,7 @@ def buy(request, product_name):
     else:
         form = BuyForm()
 
-    return render(request, 'store/buy.html', {'product':prod.name, 'form':form})
+    return render(request, 'store/buy.html', {'product':prod.name, 'form':form, 'price':price})
 
 @login_required
 def orders(request):
@@ -308,6 +309,13 @@ def change_delivery_state(request):
 def buy_from_cart(request):
     cart = request.session.get('cart', None)
 
+    price = 0
+    for cart_product in cart:
+        prod_price = Product.objects.get(name=cart_product['product']).price
+        quantity = cart_product['quantity']
+
+        price += prod_price * quantity
+
     if request.method == 'POST':
         form = BuyCartForm(request.POST)
         
@@ -333,4 +341,4 @@ def buy_from_cart(request):
     else:
         form = BuyCartForm()
 
-    return render(request, 'store/buy-from-cart.html', {'form':form, 'num':len(cart)})
+    return render(request, 'store/buy-from-cart.html', {'form':form, 'num':len(cart), 'price':price})
