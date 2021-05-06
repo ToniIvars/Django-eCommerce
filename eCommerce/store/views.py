@@ -187,7 +187,7 @@ def buy(request, product_name):
 
 @login_required
 def orders(request):
-    orders = Order.objects.filter(product__seller=User.objects.get(id=request.user.id)).order_by('date')
+    orders = Order.objects.filter(product__seller=User.objects.get(id=request.user.id)).order_by('-date')
     products_state = None
     
     if orders:
