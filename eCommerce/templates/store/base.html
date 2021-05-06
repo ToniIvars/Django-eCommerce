@@ -104,6 +104,11 @@
         .yellow {
             color: rgb(210, 210, 0);
         }
+
+        .nav-images {
+            width: 1.3rem;
+            margin-right: 0.1rem;
+        }
     </style>
 </head>
 <body>
@@ -126,9 +131,18 @@
                                     {{user.username}}
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <a class="dropdown-item" href="{% url 'cart' %}">Cart</a>
-                                <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-                                <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+                                <a class="dropdown-item" href="{% url 'cart' %}">
+                                    <img src="{% static 'store/cart.svg' %}" alt="Cart" class="d-inline nav-images">
+                                    Cart
+                                </a>
+                                <a class="dropdown-item" href="{% url 'profile' %}">
+                                    <img src="{% static 'store/profile.svg' %}" alt="Profile" class="d-inline nav-images">
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="{% url 'logout' %}">
+                                    <img src="{% static 'store/logout.svg' %}" alt="Logout" class="d-inline nav-images">
+                                    Log out
+                                </a>
                             </div>
                         </div>
                     </li>
@@ -140,8 +154,14 @@
                                     Products
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <a class="dropdown-item" href="{% url 'orders' %}">Orders</a>
-                                <a class="dropdown-item" href="{% url 'my_products' %}">My products</a>
+                                <a class="dropdown-item" href="{% url 'orders' %}">
+                                    <img src="{% static 'store/orders.svg' %}" alt="Orders" class="d-inline nav-images">
+                                    Orders
+                                </a>
+                                <a class="dropdown-item" href="{% url 'my_products' %}">
+                                    <img src="{% static 'store/products.svg' %}" alt="Products" class="d-inline nav-images">
+                                    My products
+                                </a>
                             </div>
                         </div>
                     </li>
