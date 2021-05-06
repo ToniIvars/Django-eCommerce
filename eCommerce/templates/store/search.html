@@ -17,7 +17,7 @@
         <hr>
         {% for product in results_ascendant %}
         <div class="d-flex justify-content-between align-items-center">
-            <div>
+            <div class="d-flex align-items-center">
                 {% if product.image %}
                 <div class="d-inline">
                     <img class="index-images" src="{{product.image.url}}" alt="{{product.name}}">
@@ -40,7 +40,7 @@
         <hr>
         {% for product in results_descendant %}
         <div class="d-flex justify-content-between align-items-center">
-            <div>
+            <div class="d-flex align-items-center">
                 {% if product.image %}
                 <div class="d-inline">
                     <img class="index-images" src="{{product.image.url}}" alt="{{product.name}}">

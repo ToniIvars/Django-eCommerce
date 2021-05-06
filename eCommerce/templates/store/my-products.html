@@ -17,20 +17,20 @@
                 <img class="index-images" src="{{product.image.url}}" alt="{{product.name}}">
             </div>
             {% endif %}
-            <div class="d-inline-flex flex-column ml-2">
-                <a href="{% url 'product' product_name=product.name %}" class="product-headers">
-                    <h2 class="m-0">{{product.name}}</h2>
-                </a>
+            <div class="d-inline ml-2">
+                <h2 class="m-0">{{product.name}}</h2>
             </div>
         </div>
-        <div class="d-inline text-center">
-            <p class="price m-0">{{product.price|floatformat:"-2"}}$</p>
-            <a class="mx-1" href="{% url 'edit_product' product_name=product.name %}">
-                <img class="edit-delete-images" src="{% static 'store/edit.svg' %}" alt="Edit">
-            </a>
-            <a href="{% url 'delete_product' product_name=product.name %}">
-                <img class="edit-delete-images" src="{% static 'store/delete.svg' %}" alt="Delete">
-            </a>
+        <div class="d-inline-flex flex-column">
+            <div class="price">{{product.price|floatformat:"-2"}}$</div>
+            <div class="d-flex justify-content-around">
+                <a href="{% url 'edit_product' product_name=product.name %}">
+                    <img class="edit-delete-images" src="{% static 'store/edit.svg' %}" alt="Edit">
+                </a>
+                <a href="{% url 'delete_product' product_name=product.name %}">
+                    <img class="edit-delete-images" src="{% static 'store/delete.svg' %}" alt="Delete">
+                </a>
+            </div>
         </div>
     </div>
     <hr>

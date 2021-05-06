@@ -9,8 +9,8 @@
     <form action="" method="post"> {% csrf_token %}
         <p class="text-center">Are you sure you want to delete <b>"{{product}}"</b>?</p>
         <div class="form-group text-center my-2">
-            <input class="btn btn-danger font-weight-bold mr-2" name="delete" type="submit" value="Delete">
-            <input class="btn btn-primary font-weight-bold ml-2" type="submit" value="Go to index">
+            <input class="btn btn-danger mr-2" name="delete" type="submit" value="Delete">
+            <input class="btn btn-primary ml-2" type="submit" value="Go to index">
         </div>
     </form>
 {% endblock %}

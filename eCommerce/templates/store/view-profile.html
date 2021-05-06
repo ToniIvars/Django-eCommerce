@@ -20,7 +20,7 @@
                 </a>
             </div>
         </div>
-        <p class="price">{{product.price|floatformat:"-2"}}$</p>
+        <div class="price d-flex flex-column">{{product.price|floatformat:"-2"}}$</div>
     </div>
     <hr>
     {% empty %}

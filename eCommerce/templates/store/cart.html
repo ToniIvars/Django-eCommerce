@@ -9,7 +9,7 @@
     {% for product, quantity in cart_products %}
     <div id="{{product.name}}">
         <div class="d-flex justify-content-between align-items-center">
-            <div>
+            <div class="d-flex align-items-center">
                 {% if product.image %}
                 <div class="d-inline">
                     <img class="index-images" src="{{product.image.url}}" alt="{{product.name}}">
@@ -26,11 +26,11 @@
                 <p class="price m-0">{{product.price|floatformat:"-2"}}$</p>
                 <div class="d-flex justify-content-center w-100 align-items-center">
                     <button class="ml-md-3 non-bg-button" id="remove-{{product.name}}">
-                        <img style="width: 1.5rem;" src="{% static 'store/remove.svg' %}" alt="Remove">
+                        <img class="mini-images" src="{% static 'store/remove.svg' %}" alt="Remove">
                     </button>
-                    <div class="mx-1" style="font-size: 1.5rem;" id="quantity-{{product.name}}">{{quantity}}</div>
+                    <div style="font-size: 1.5rem;" id="quantity-{{product.name}}">{{quantity}}</div>
                     <button class="non-bg-button" id="add-{{product.name}}">
-                        <img style="width: 1.5rem;" src="{% static 'store/add.svg' %}" alt="Add">
+                        <img class="mini-images" src="{% static 'store/add.svg' %}" alt="Add">
                     </button>
                 </div>
             </div>
@@ -44,9 +44,9 @@
     {% endfor %}
 
     {% if cart_products %}
-    <div class="float-md-right d-md-block d-flex flex-column-reverse align-items-end" id="total-display">
-        <a href="{% url 'buy_from_cart' %}" class="btn btn-primary font-weight-bold mr-md-2 mr-1 mt-md-0 mt-2">Buy all products</a>
-        <div class="d-md-inline">
+    <div class="float-right" id="total-display">
+        <a href="{% url 'buy_from_cart' %}" class="btn btn-primary mr-2">Buy all products</a>
+        <div class="d-inline">
             <span>Total: </span>
             <span class="ml-2" id="total-span">$</span>
         </div>
