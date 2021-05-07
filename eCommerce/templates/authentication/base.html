@@ -8,6 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eCommerce - {% block title %}{% endblock %}</title>
+
+    <link rel="shortcut icon" href="{%  static 'favicon.ico' %}" id="white-theme-favicon">
+    <link rel="shortcut icon" href="{%  static 'favicon-white.ico' %}" id="dark-theme-favicon">
     {% bootstrap_css %}
     {% block style %}{% endblock %}
 </head>
@@ -24,6 +27,8 @@
         <img class="mb-3" src="{% static 'logo.svg' %}" style="width: 12rem;">
         {% block content %}{% endblock %}
     </div>
+    
     {% bootstrap_javascript jquery='full' %}
+    <script src="{% static 'authentication/base.js' %}"></script>
 </body>
 </html>
