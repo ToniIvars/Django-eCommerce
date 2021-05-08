@@ -112,6 +112,28 @@
             width: 1.4rem;
             margin: 0 0.1rem 0.1rem;
         }
+
+        .only-border-button-success {
+            background: none;
+            border: solid 2px #28a745;
+            border-radius: 5px;
+            color: #28a745;
+        }
+
+        .only-border-button-error {
+            background: none;
+            border: solid 2px #721c24;
+            border-radius: 5px;
+            color: #721c24;
+        }
+
+        .main-container {
+            margin-top: 4.8rem !important;
+        }
+
+        #message-container {
+            margin-top: 4rem;
+        }
     </style>
 </head>
 <body>
@@ -187,14 +209,20 @@
     {% if messages %}
         {% for message in messages %}
             {% if message.tags == 'error' %}
-                <div class="alert alert-danger" style="margin-top: 4rem;">{{ message }}</div>
+                <div class="alert alert-danger d-flex justify-content-between align-items-center" id="message-container">
+                    <p class="mb-0 pb-0">{{ message }}</p>
+                    <button class="mb-0 py-0 only-border-button-{{message.tags}}" id="close-message">X</button>
+                </div>
             {% else %}
-                <div class="alert alert-{{message.tags}}" style="margin-top: 4rem;">{{ message }}</div>
+                <div class="alert alert-{{message.tags}} d-flex justify-content-between align-items-center" id="message-container">
+                    <p class="mb-0 pb-0">{{ message }}</p>
+                    <button class="mb-0 py-0 only-border-button-{{message.tags}}" id="close-message">X</button>
+                </div>
             {% endif %}
         {% endfor %}
-        <div class="container mt-2">
+        <div class="container mt-2" id="container-when-message">
     {% else %}
-        <div class="container mb-5" style="padding-top: 4.8rem;">
+        <div class="container mb-5 main-container">
     {% endif %}
 
             {% block content %}{% endblock %}

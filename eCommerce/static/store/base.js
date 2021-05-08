@@ -29,4 +29,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Code for hiding the message
+    const message_container = document.getElementById('message-container')
+
+    document.getElementById('close-message').onclick = () => {
+        message_container.classList.add('not-displayed')
+        document.getElementById('container-when-message').classList.add('main-container')
+    }
 })
