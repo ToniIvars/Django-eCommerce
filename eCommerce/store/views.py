@@ -41,7 +41,7 @@ def profile(request):
             user.save()
 
             messages.success(request, 'Profile edited successfully')
-            return redirect('index')
+            return redirect('profile')
 
     else:
         form = ProfileForm(user_id=request.user.id)
@@ -80,7 +80,7 @@ def create_product(request):
             prod.save()
 
             messages.success(request, 'Product created successfully')
-            return redirect('index')
+            return redirect('my_products')
 
     else:
         form = ProductForm()
@@ -104,7 +104,7 @@ def edit_product(request, product_name):
             prod.save()
 
             messages.success(request, 'Product edited successfully')
-            return redirect('index')
+            return redirect('my_products')
 
     else:
         form = ProductForm(instance=prod)
@@ -125,7 +125,7 @@ def delete_product(request, product_name):
 
             messages.success(request, 'Product deleted successfully')
         
-        return redirect('index')
+        return redirect('my_products')
 
     return render(request, 'store/delete-product.html', {'product':prod.name})
 
