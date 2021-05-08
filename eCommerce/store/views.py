@@ -228,7 +228,7 @@ def add_to_cart(request, product_name):
             {'product':product_name, 'quantity':1}
         ]
 
-    messages.success(request, 'Product added to the cart')
+    messages.success(request, 'Product added to the <a href="/cart" class="text-success">cart</a>')
     return redirect('product', product_name=product_name)
 
 @login_required

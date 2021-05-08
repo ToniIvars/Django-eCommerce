@@ -210,12 +210,12 @@
         {% for message in messages %}
             {% if message.tags == 'error' %}
                 <div class="alert alert-danger d-flex justify-content-between align-items-center" id="message-container">
-                    <p class="mb-0 pb-0">{{ message }}</p>
+                    <p class="mb-0 pb-0">{{ message|safe }}</p>
                     <button class="mb-0 py-0 only-border-button-{{message.tags}}" id="close-message">X</button>
                 </div>
             {% else %}
                 <div class="alert alert-{{message.tags}} d-flex justify-content-between align-items-center" id="message-container">
-                    <p class="mb-0 pb-0">{{ message }}</p>
+                    <p class="mb-0 pb-0">{{ message|safe }}</p>
                     <button class="mb-0 py-0 only-border-button-{{message.tags}}" id="close-message">X</button>
                 </div>
             {% endif %}
